@@ -6,6 +6,11 @@
         "illuminate/support": "^5.3"
     },
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DefrostedTuna\\Alnus\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "Rick Bennett",
