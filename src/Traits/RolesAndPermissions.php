@@ -68,7 +68,7 @@ trait RolesAndPermissions
         if (is_string($permissions)) {
             foreach ($this->roles->load('permissions') as $role) {
                 foreach ($role->permissions as $perm) {
-                    if ($perm->slug == $permissions) {
+                    if ($perm->name == $permissions) {
                         return true;
                     }
                 }
