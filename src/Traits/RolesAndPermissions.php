@@ -11,21 +11,36 @@ trait RolesAndPermissions
      * This trait is meant to go onto the User model.
      */
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
     public function isA($role)
     {
         return $this->hasRole($role);
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
     public function isAn($role)
     {
         return $this->hasRole($role);
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
     public function hasRole($role)
     {
         // Check for an array of roles and pass them back through.
@@ -51,6 +66,10 @@ trait RolesAndPermissions
         return (bool) $role->intersect($this->roles)->count();
     }
 
+    /**
+     * @param $permissions
+     * @return bool
+     */
     public function isAbleTo($permissions)
     {
         // Check if the argument is an array and pass each one through as a string.
@@ -78,6 +97,11 @@ trait RolesAndPermissions
         return false;
     }
 
+    /**
+     * @param $role
+     * @return bool
+     * @throws InvalidInstanceException
+     */
     public function assignRole($role)
     {
         // Check if there are multiple roles passed through.
@@ -105,6 +129,10 @@ trait RolesAndPermissions
         }
     }
 
+    /**
+     * @param array $roles
+     * @return mixed
+     */
     public function syncRoles(array $roles)
     {
         $theseRoles = [];
@@ -116,6 +144,11 @@ trait RolesAndPermissions
         return $this->roles()->sync($theseRoles);
     }
 
+    /**
+     * @param $role
+     * @return bool
+     * @throws InvalidInstanceException
+     */
     public function revokeRole($role)
     {
         // Check if there are multiple roles passed through.
@@ -142,11 +175,19 @@ trait RolesAndPermissions
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function revokeAllRoles()
     {
         return $this->roles()->detach();
     }
 
+    /**
+     * @param $role
+     * @return mixed
+     * @throws InvalidInstanceException
+     */
     protected function parseRoleId($role)
     {
         // Check if an id has already been passed.
@@ -169,5 +210,4 @@ trait RolesAndPermissions
             );
         }
     }
-
 }

@@ -7,16 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany(config('alnus.models.user', \App\Models\User::class));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }
 
+    /**
+     * @param $permission
+     * @return bool
+     * @throws InvalidInstanceException
+     */
     public function givePermission($permission)
     {
         // Check if there are multiple permissions passed through.
@@ -44,6 +55,10 @@ class Role extends Model
         }
     }
 
+    /**
+     * @param array $permissions
+     * @return array
+     */
     public function syncPermissions(array $permissions)
     {
         $thesePermissions = [];
@@ -55,6 +70,11 @@ class Role extends Model
         return $this->permissions()->sync($thesePermissions);
     }
 
+    /**
+     * @param $permission
+     * @return bool|int
+     * @throws InvalidInstanceException
+     */
     public function revokePermission($permission)
     {
         // Check if there are multiple permissions passed through.
@@ -81,11 +101,19 @@ class Role extends Model
         }
     }
 
+    /**
+     * @return int
+     */
     public function revokeAllPermissions()
     {
         return $this->permissions()->detach();
     }
 
+    /**
+     * @param $permission
+     * @return mixed
+     * @throws InvalidInstanceException
+     */
     protected function parsePermissionId($permission)
     {
         // Check if an id has already been passed.
