@@ -124,7 +124,7 @@ $role->givePermission($permission);
 
 ---
 
-### Integration with Laravel's GATE system
+### Integration with Laravel's Gate system
 
 I mentioned that this is designed to be easily used with Laravel's gate system,  lets see an example of how I typically do this.
 
@@ -151,7 +151,7 @@ public function update(User $user, Post $post)
 ```php
 // routes/web.php
 
-Route::get('posts/{post}/edit, [
+Route::get('posts/{post}/edit', [
 	'uses' => 'PostController@edit',
     'middleware' => 'can:update,post'
 ]);
