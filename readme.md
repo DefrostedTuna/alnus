@@ -1,5 +1,5 @@
-Alnus
----
+# Alnus
+
 Alnus is a library to add roles and permissions to a Laravel project and is built to work alongside Laravel's Gate system. Alnus hill is a reference to something called, wait for it... [Gate](https://en.wikipedia.org/wiki/Gate_(novel_series)).
 
 ### Quick Installation
@@ -18,8 +18,8 @@ Otherwise you could just place it in your `composer.json` file.
 },
  ```
  
- ### Service Provider
- After installing, you must place the service provider into `config/app.php`
+### Service Provider
+After installing, you must place the service provider into `config/app.php`
  
  ```php
  'providers' => [
@@ -33,11 +33,11 @@ Otherwise you could just place it in your `composer.json` file.
  ],
  ```
  
- ### Migrations
- Migrations have been made to incorporate this into an application out of the box. 
- Simply run `php artisan migrate` to have the migration tables created.
+### Migrations
+Migrations have been made to incorporate this into an application out of the box. 
+Simply run `php artisan migrate` to have the migration tables created.
  
- **Note:** By default, Alnus is set to migrate a **uuid** field as a foreign key in reference to the *users* table. 
+**Note:** By default, Alnus is set to migrate a **uuid** field as a foreign key in reference to the *users* table. 
  
 Personally, I use the package `webpatser/laravel-uuid` for this matter. [Here is a very good article on implementing uuids into a Laravel project](https://medium.com/@steveazz/setting-up-uuids-in-laravel-5-552412db2088#.ytme0xw00).
 
