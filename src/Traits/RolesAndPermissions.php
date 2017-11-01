@@ -20,6 +20,16 @@ trait RolesAndPermissions
     }
 
     /**
+     * @return mixed
+     */
+    public function cachedRoles()
+    {
+        return \Cache::remember('user_' . $this->id . '_roles', 10, function() {
+            return $this->roles()->with('permissions')->get()->toArray();
+        });
+    }
+
+    /**
      * @param $role
      * @return bool
      */
@@ -85,9 +95,9 @@ trait RolesAndPermissions
 
         // Check if user has access to a role that gives them permission.
         if (is_string($permissions)) {
-            foreach ($this->roles->load('permissions') as $role) {
-                foreach ($role->permissions as $perm) {
-                    if ($perm->name == $permissions) {
+            foreach ($this->cachedRoles() as $role) {
+                foreach ($role['permissions'] as $perm) {
+                    if ($perm['name'] == $permissions) {
                         return true;
                     }
                 }
