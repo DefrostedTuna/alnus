@@ -171,7 +171,7 @@ trait RolesAndPermissions
 
         // Find record and send back through to be attached.
         if (is_string($role)) {
-            $record = $this->roles->where('name', $role)->firstOrFail();
+            $record = $this->roles()->where('name', $role)->firstOrFail();
             return $this->revokeRole($record);
         }
 
