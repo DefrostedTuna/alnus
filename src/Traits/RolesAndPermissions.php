@@ -95,7 +95,7 @@ trait RolesAndPermissions
 
         // Check if user has access to a role that gives them permission.
         if (is_string($permissions)) {
-            foreach ($this->cachedRoles() as $role) {
+            foreach ($this->roles as $role) {
                 foreach ($role['permissions'] as $perm) {
                     if ($perm['name'] == $permissions) {
                         return true;
