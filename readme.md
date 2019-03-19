@@ -14,24 +14,24 @@ Otherwise you could just place it in your `composer.json` file.
 
 ```javascript
 "require": {
-	"defrostedtuna/alnus": "^1.0"
+    "defrostedtuna/alnus": "^1.0"
 },
  ```
  
 ### Service Provider
 After installing, you must place the service provider into `config/app.php`
  
- ```php
- 'providers' => [
+```php
+'providers' => [
 
     // Lots of providers here
     
- 	DefrostedTuna\Alnus\AlnusServiceProvider::class,
+    DefrostedTuna\Alnus\AlnusServiceProvider::class,
     
     // Some other jargon afterwards
     
- ],
- ```
+],
+```
  
 ### Migrations
 Migrations have been made to incorporate this into an application out of the box. 
@@ -88,7 +88,7 @@ What if you want to check for roles and permissions?
 ```php
 // String, Role/Permission object, or an array of either.
 $role = "moderator";
-$permission = "upate_post";
+$permission = "update_post";
 
 $user->hasRole($role);
 $user->isA($role); // $user->isA('moderator');
@@ -137,14 +137,14 @@ I prefer to use policies when working with a project. I'll use policies in this 
 
 public function before($user, $ability)
 {
-	if ($user->isAn('administrator') {
-    	return true;
+    if ($user->isAn('administrator') {
+        return true;
     }
 }
 
 public function update(User $user, Post $post)
 {
-	return ($user->isAbleTo('update_post') || $user->owns($post)) true : false;
+    return ($user->isAbleTo('update_post') || $user->owns($post)) true : false;
 }
 ```
 
@@ -152,7 +152,7 @@ public function update(User $user, Post $post)
 // routes/web.php
 
 Route::get('posts/{post}/edit', [
-	'uses' => 'PostController@edit',
+    'uses' => 'PostController@edit',
     'middleware' => 'can:update,post'
 ]);
 ```
